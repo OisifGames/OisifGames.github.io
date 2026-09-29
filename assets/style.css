@@ -191,14 +191,14 @@ section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
   align-items: center;
   justify-content: center;
   padding: 1.1rem;
-  min-height: 12rem;
+  aspect-ratio: 1 / 1;
 }
 
 .game-art img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 12.3rem;
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -237,8 +237,6 @@ section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
 
 .game-art.shot {
   padding: 0;
-  aspect-ratio: 656 / 646;
-  min-height: 0;
   position: relative;
   overflow: hidden;
   background: var(--brand, var(--bg-2));
@@ -409,8 +407,8 @@ footer.site nav a:first-child { margin-left: 0; }
 
 @media (max-width: 48rem) {
   .game { grid-template-columns: 1fr; }
-  .game-art { min-height: 0; aspect-ratio: 16 / 9; padding: 1.5rem; }
-  .game-art.shot { aspect-ratio: 656 / 646; padding: 0; }
+  .game-art { padding: 1.5rem; }
+  .game-art.shot { padding: 0; }
   .game-body { padding: 1.5rem; }
 }
 

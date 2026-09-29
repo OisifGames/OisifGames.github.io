@@ -3,7 +3,7 @@
 Static site for Oisif Games: landing page, support, privacy policy, terms of use.
 
 Plain HTML and one stylesheet. No build step, no framework, nothing loaded from a
-third-party origin, so the fonts and the artwork are served from here too.
+third-party origin, so the font and the artwork are served from here too.
 
 ```
 index.html          landing
@@ -15,31 +15,39 @@ robots.txt          crawl rules
 sitemap.xml         the four indexable pages
 app-ads.txt         authorized seller records
 assets/style.css    the only stylesheet
-assets/fonts/       Fraunces and Figtree, woff2, SIL Open Font License
-assets/img/         props from Hole City
+assets/fonts/       Figtree, woff2, SIL Open Font License
+assets/games/       one logo per title
 assets/og.png       social preview card
-assets/favicon.svg  the hole mark
+assets/favicon.svg  the studio mark
 ```
 
-## The artwork
+## Adding a game
 
-The props are renders of Hole City's own meshes. They ship with the game's
-backdrop baked in as an opaque `#EEF7FB`, and the cut-outs here were made by
-keying that colour out to alpha with a soft ramp, then cropping to the bounding
-box.
+The shell is deliberately neutral. It belongs to the studio, not to any one title,
+so nothing in the CSS knows which games exist. A new game is one more `<article
+class="game">` in `index.html`:
 
-`--sky` in the stylesheet is that same `#EEF7FB`, which is why a prop dropped on
-the page has no visible edge. Change one and you change the other.
+```html
+<article class="game">
+  <div class="game-art" style="--brand:#RRGGBB">
+    <img src="/assets/games/<name>.webp" alt="<Name>">
+  </div>
+  <div class="game-body">
+    <h3>…</h3><p>…</p><p class="meta">…</p><a class="btn" href="…">App Store</a>
+  </div>
+</article>
+```
 
-The street in the hero is a flex row whose heights are percentages of the row's
-own aspect ratio, so a new prop needs a height that keeps the row under 100% at
-every breakpoint.
+`--brand` is the colour panel behind the logo, taken from the game's own art. Put
+the logo in `assets/games/` as a transparent webp, trimmed to its bounding box.
+That is the only place colour enters the site.
+
+Add the game to the schema.org `@graph` in the same file, as another `VideoGame`
+published by the Organization.
 
 ## Fonts
 
-Fraunces for display, Figtree for text, both under the SIL Open Font License and
-self-hosted with the licence text beside them. The font Hole City uses in game is
-a commercial licence that covers the app rather than a website, so it is not here.
+Figtree, SIL Open Font License, self-hosted with the licence text beside it.
 
 ## app-ads.txt
 

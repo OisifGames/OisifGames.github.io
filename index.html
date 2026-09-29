@@ -19,9 +19,8 @@
 <meta name="twitter:title" content="Oisif Games, independent mobile game studio">
 <meta name="twitter:description" content="Oisif Games is a small independent studio in France making mobile games. Hole City is out now on the App Store.">
 <meta name="twitter:image" content="https://oisifgames.com/assets/og.png">
-<meta name="theme-color" content="#eef7fb">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css">
 <script type="application/ld+json">
@@ -38,22 +37,14 @@
       "image": "https://oisifgames.com/assets/og.png",
       "email": "support@oisifgames.com",
       "description": "Oisif Games is a small independent studio in France making mobile games.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "FR"
-      },
-      "sameAs": [
-        "https://apps.apple.com/app/id6736468492"
-      ],
+      "address": {"@type": "PostalAddress", "addressCountry": "FR"},
+      "sameAs": ["https://apps.apple.com/app/id6736468492"],
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
         "email": "support@oisifgames.com",
         "url": "https://oisifgames.com/support/",
-        "availableLanguage": [
-          "English",
-          "French"
-        ]
+        "availableLanguage": ["English", "French"]
       }
     },
     {
@@ -62,9 +53,7 @@
       "url": "https://oisifgames.com/",
       "name": "Oisif Games",
       "inLanguage": "en",
-      "publisher": {
-        "@id": "https://oisifgames.com/#organization"
-      }
+      "publisher": {"@id": "https://oisifgames.com/#organization"}
     },
     {
       "@type": "VideoGame",
@@ -72,19 +61,12 @@
       "name": "Hole City",
       "url": "https://oisifgames.com/#games",
       "sameAs": "https://apps.apple.com/app/id6736468492",
-      "description": "You are a hole in the ground. Swallow parked cars, then bus stops, then the buildings they sit under, and grow with everything you take.",
-      "publisher": {
-        "@id": "https://oisifgames.com/#organization"
-      },
-      "author": {
-        "@id": "https://oisifgames.com/#organization"
-      },
+      "description": "You are a hole in the ground. Swallow the city, grow with everything you take, and finish the district before the clock does.",
+      "publisher": {"@id": "https://oisifgames.com/#organization"},
+      "author": {"@id": "https://oisifgames.com/#organization"},
       "applicationCategory": "GameApplication",
       "operatingSystem": "iOS",
-      "gamePlatform": [
-        "iPhone",
-        "iPad"
-      ],
+      "gamePlatform": ["iPhone", "iPad"],
       "playMode": "SinglePlayer",
       "offers": {
         "@type": "Offer",
@@ -114,125 +96,47 @@
 
 <main>
 
-  <div class="hero">
+  <section class="hero">
     <div class="wrap">
-      <h1>We make small games.<br>This one eats a <em>city</em>.</h1>
-      <p class="lede">Oisif Games is a small independent studio in France.
-         Hole City is out now on iPhone and iPad.</p>
-    </div>
-  </div>
-
-  <div class="city" aria-hidden="true">
-    <img class="plane" src="/assets/img/plane.webp" alt="" width="288" height="288" loading="eager">
-    <div class="city-row">
-      <span class="thing t-tower"><img src="/assets/img/tower-red.webp" alt="" width="288" height="288"></span>
-      <span class="thing t-terrace"><img src="/assets/img/terrace-mint.webp" alt="" width="288" height="288"></span>
-      <span class="thing t-townhall"><img src="/assets/img/townhall.webp" alt="" width="288" height="288"></span>
-
-      <div class="hole-slot">
-        <div class="hole"></div>
-        <img class="falling f-car" src="/assets/img/car-pink.webp" alt="" width="288" height="288">
-        <img class="falling f-person" src="/assets/img/person-c.webp" alt="" width="288" height="288">
-        <img class="falling f-truck" src="/assets/img/icecream-truck.webp" alt="" width="288" height="288">
-        <div class="hole-lip"></div>
-      </div>
-      <span class="thing t-manor"><img src="/assets/img/manor.webp" alt="" width="288" height="288"></span>
-      <span class="thing t-highrise"><img src="/assets/img/highrise.webp" alt="" width="288" height="288"></span>
-      <span class="thing t-ferris"><img src="/assets/img/ferris-wheel.webp" alt="" width="288" height="288"></span>
-    </div>
-  </div>
-
-  <div class="band">
-    <section id="games" style="padding:0">
-      <div class="wrap">
-        <h2>Games</h2>
-
-        <div class="game">
-          <div>
-            <span class="tag">Out now, iOS</span>
-            <h3>Hole City</h3>
-            <p>You are a hole in the ground. Swallow parked cars, then bus stops,
-               then the buildings they sit under, and grow with everything you take.
-               The district is yours if you finish it before the clock does.</p>
-            <p style="margin-bottom:0">
-              <a class="btn" href="https://apps.apple.com/app/id6736468492">
-                <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                Download on the App Store
-              </a>
-            </p>
-          </div>
-          <div class="diorama" aria-hidden="true">
-            <div class="hole"></div>
-            <img class="d-1" src="/assets/img/block-blue.webp" alt="" width="288" height="288">
-            <img class="d-2" src="/assets/img/circus.webp" alt="" width="288" height="288">
-            <img class="d-3" src="/assets/img/firetruck.webp" alt="" width="288" height="288">
-            <div class="hole-lip"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="strip" aria-hidden="true">
-      <div class="strip-row">
-        <img src="/assets/img/car-cream.webp" alt="" width="288" height="288">
-        <img src="/assets/img/lollipop.webp" alt="" width="288" height="288">
-        <img src="/assets/img/palm.webp" alt="" width="288" height="288">
-        <img src="/assets/img/person-a.webp" alt="" width="288" height="288">
-        <img src="/assets/img/traffic-light.webp" alt="" width="288" height="288">
-        <img src="/assets/img/semi-red.webp" alt="" width="288" height="288">
-        <img src="/assets/img/sunglasses.webp" alt="" width="288" height="288">
-        <img src="/assets/img/block-dark.webp" alt="" width="288" height="288">
-        <img src="/assets/img/person-d.webp" alt="" width="288" height="288">
-        <img src="/assets/img/car-teal.webp" alt="" width="288" height="288">
-        <img src="/assets/img/shop-corner.webp" alt="" width="288" height="288">
-        <img src="/assets/img/boat.webp" alt="" width="288" height="288">
-        <img src="/assets/img/person-b.webp" alt="" width="288" height="288">
-        <img src="/assets/img/cafe.webp" alt="" width="288" height="288">
-        <img src="/assets/img/tower-brick.webp" alt="" width="288" height="288">
-        <img src="/assets/img/store.webp" alt="" width="288" height="288">
-        <!-- duplicated so the loop has no seam -->
-        <img src="/assets/img/car-cream.webp" alt="" width="288" height="288">
-        <img src="/assets/img/lollipop.webp" alt="" width="288" height="288">
-        <img src="/assets/img/palm.webp" alt="" width="288" height="288">
-        <img src="/assets/img/person-a.webp" alt="" width="288" height="288">
-        <img src="/assets/img/traffic-light.webp" alt="" width="288" height="288">
-        <img src="/assets/img/semi-red.webp" alt="" width="288" height="288">
-        <img src="/assets/img/sunglasses.webp" alt="" width="288" height="288">
-        <img src="/assets/img/block-dark.webp" alt="" width="288" height="288">
-        <img src="/assets/img/person-d.webp" alt="" width="288" height="288">
-        <img src="/assets/img/car-teal.webp" alt="" width="288" height="288">
-        <img src="/assets/img/shop-corner.webp" alt="" width="288" height="288">
-        <img src="/assets/img/boat.webp" alt="" width="288" height="288">
-        <img src="/assets/img/person-b.webp" alt="" width="288" height="288">
-        <img src="/assets/img/cafe.webp" alt="" width="288" height="288">
-        <img src="/assets/img/tower-brick.webp" alt="" width="288" height="288">
-        <img src="/assets/img/store.webp" alt="" width="288" height="288">
-      </div>
-    </div>
-  </div>
-
-  <section>
-    <div class="wrap">
-      <h2>The studio</h2>
-      <p style="max-width:34rem">Oisif Games is a small independent studio in France. It ships short
-         mobile games, the kind you pick up on a train and put down at the next stop.</p>
-      <p style="max-width:34rem">Hole City is the first one on the App Store. Anything that follows
-         gets announced here.</p>
+      <h1>Oisif Games</h1>
+      <p class="lede">A small independent studio in France. We make short mobile games
+         and publish them ourselves.</p>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section id="games">
     <div class="wrap">
-      <h2>Talk to us</h2>
-      <div class="contact">
-        <p style="max-width:32rem;margin:0">
-          Bug reports, lost progress, questions about your data. A real person reads
-          every message, usually within two business days. The
-          <a href="/support/">support page</a> lists what to send so the first reply
-          can already be useful.
-        </p>
-        <a class="mail" href="mailto:support@oisifgames.com">support@oisifgames.com</a>
+      <h2 class="eyebrow">Games</h2>
+      <div class="games">
+
+        <article class="game">
+          <div class="game-art" style="--brand:#ecb219">
+            <img src="/assets/games/hole-city.webp" alt="Hole City" width="720" height="701">
+          </div>
+          <div class="game-body">
+            <h3>Hole City</h3>
+            <p>You are a hole in the ground. Swallow the city, grow with everything you
+               take, and finish the district before the clock does.</p>
+            <p class="meta">iPhone and iPad, free</p>
+            <a class="btn" href="https://apps.apple.com/app/id6736468492">
+              <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              App Store
+            </a>
+          </div>
+        </article>
+
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="eyebrow">Contact</h2>
+      <p style="max-width:34rem;margin:0 0 1.25rem">Bug reports, lost progress, questions
+         about your data. A real person reads every message, usually within two business
+         days. The <a href="/support/">support page</a> lists what to send so the first
+         reply can already be useful.</p>
+      <a class="mail" href="mailto:support@oisifgames.com">support@oisifgames.com</a>
     </div>
   </section>
 

@@ -228,6 +228,51 @@ section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
   color: inherit;
 }
 
+/* A screenshot fills its panel edge to edge; a logo gets padding. */
+.game-art.shot { padding: 0; }
+.game-art.shot img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+
+/* Screenshots under the card. Scrolls horizontally rather than shrinking. */
+.shots {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+}
+
+.shots::-webkit-scrollbar { display: none; }
+
+.shots img {
+  flex: none;
+  width: 9.5rem;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+@media (max-width: 34rem) {
+  .shots img { width: 8rem; }
+}
+
+/* A code name is not the title; say so next to it rather than in a sentence. */
+.codename {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  vertical-align: 0.22em;
+  white-space: nowrap;
+}
+
 .status {
   display: inline-flex;
   align-items: center;

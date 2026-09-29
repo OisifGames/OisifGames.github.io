@@ -1,0 +1,5 @@
+# https://oisifgames.com/
+User-agent: *
+Allow: /
+
+Sitemap: https://oisifgames.com/sitemap.xml

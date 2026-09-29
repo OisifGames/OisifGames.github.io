@@ -191,7 +191,7 @@ section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
   align-items: center;
   justify-content: center;
   padding: 1.1rem;
-  min-height: 14.5rem;
+  min-height: 11rem;
 }
 
 .game-art img {
@@ -229,8 +229,36 @@ section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
 }
 
 /* A screenshot fills its panel edge to edge; a logo gets padding. */
-.game-art.shot { padding: 0; }
-.game-art.shot img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+/* A screenshot is shown whole: the panel stretches to the card's height, so
+   `cover` would crop it by however much the text column happens to be taller,
+   and in this one the subject runs edge to edge. `contain` costs two bands,
+   which are filled with a blurred copy of the shot itself. The URL arrives as
+   --shot on the element, so the stylesheet stays ignorant of which game it is. */
+
+.game-art.shot {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--brand, var(--bg-2));
+}
+
+.game-art.shot::before {
+  content: '';
+  position: absolute;
+  inset: -8%;
+  background: var(--shot) center / cover no-repeat;
+  filter: blur(22px) saturate(1.1);
+  transform: scale(1.05);
+}
+
+.game-art.shot img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+}
 
 /* A code name is not the title; say so next to it rather than in a sentence. */
 .codename {

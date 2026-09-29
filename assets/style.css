@@ -214,6 +214,42 @@ section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
   margin: 0 0 1.25rem;
 }
 
+/* An unreleased title has no store link and often no logo yet, so the art panel
+   carries its name in type and the button is replaced by a status line. */
+
+.game.wip .game-art { color: #fff; }
+
+.game-art .wordmark {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-align: center;
+  color: inherit;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+}
+
+.status::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--brand, var(--ink-3));
+  flex: none;
+}
+
 /* ── Buttons ────────────────────────────────────────────────────── */
 
 .btn {

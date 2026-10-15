@@ -1,0 +1,32 @@
+# Netlify config for oisifgames.com. The site is plain static files committed to the repo,
+# so there is no build step: publish the repo root as it is.
+#
+# Two things here exist only for Hole City's deep links, and both are the reason this site
+# moved off GitHub Pages on 2026-10-15:
+#   1. apple-app-site-association has no file extension, so a host that cannot set a content
+#      type serves it as application/octet-stream. Apple documents application/json. Measured
+#      on Pages: octet-stream, which is why universal links could not be trusted there.
+#   2. A friend link is /hole/f/<code>, and a static host with no rewrite answers 404 for
+#      every code. The rewrite below serves the landing page while keeping the URL, which is
+#      what the page needs to read the code out of the path.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+
+[[headers]]
+  for = "/.well-known/assetlinks.json"
+  [headers.values]
+    Content-Type = "application/json"
+
+# 200, not 301: a rewrite. Apple refuses a redirect on the association file, and the landing
+# page must keep the code in the URL it was opened with.
+[[redirects]]
+  from = "/hole/f/*"
+  to = "/hole/f/index.html"
+  status = 200

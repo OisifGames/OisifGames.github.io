@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.OisifGames.Hole",
+      "sha256_cert_fingerprints": [
+        "DC:A7:8A:2C:E1:3C:69:FC:9C:97:46:93:7A:2A:2A:F6:AB:C1:C6:79:9A:08:71:1D:E6:F5:41:CC:17:93:02:23"
+      ]
+    }
+  }
+]

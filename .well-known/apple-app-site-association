@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["B3ZXMPBSC6.com.OisifGames.Hole"],
+        "components": [
+          { "/": "/hole/f/*", "comment": "Hole City friend invite links" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,8 +1,13 @@
 # Netlify config for oisifgames.com. The site is plain static files committed to the repo,
 # so there is no build step: publish the repo root as it is.
 #
-# Two things here exist only for Hole City's deep links, and both are the reason this site
-# moved off GitHub Pages on 2026-10-15:
+# This file is prepared, not applied. As of 2026-10-19 oisifgames.com still answers from
+# GitHub Pages (DNS on the 185.199.x.153 addresses, `server: GitHub.com`), so nothing below
+# takes effect and the two problems it solves are still live on the site. Whether the site
+# moves here, behind Cloudflare, or stays put is Fc's open decision.
+#
+# Two things here exist only for Hole City's deep links, and both are why a move was proposed
+# on 2026-10-15:
 #   1. apple-app-site-association has no file extension, so a host that cannot set a content
 #      type serves it as application/octet-stream. Apple documents application/json. Measured
 #      on Pages: octet-stream, which is why universal links could not be trusted there.

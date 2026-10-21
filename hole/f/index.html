@@ -98,6 +98,16 @@
     try { code = q ? decodeURIComponent(q[1]) : ""; } catch (e) { code = ""; }
     if (!/^[A-Za-z0-9_-]{1,64}$/.test(code)) code = "";
   }
+  // Invites shared before the move point at the old host, and nothing can retract them. Any host
+  // but the canonical one hands the visitor straight over, so only one domain ever renders this
+  // page to a player. Inert on the canonical host, which is why both copies of this file are the
+  // same bytes.
+  var CANONICAL_HOST = "oisifgames.com";
+  if (code && location.hostname !== CANONICAL_HOST && location.hostname !== "www." + CANONICAL_HOST) {
+    location.replace("https://" + CANONICAL_HOST + "/hole/f/?c=" + encodeURIComponent(code));
+    return;
+  }
+
   // The link to hand back, rebuilt on whatever host served this page and in the form it arrived
   // in, so no domain is hardcoded and the copy always matches what the friend shared.
   var link = location.origin + (m ? "/hole/f/" + code : "/hole/f/?c=" + encodeURIComponent(code));

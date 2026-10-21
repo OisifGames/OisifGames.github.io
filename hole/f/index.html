@@ -174,10 +174,42 @@ h1 { font-size: 30px; line-height: 1.05; margin: 0 0 var(--sp-3); }  /* --hc-fs-
 .lead { font-size: 17px; color: var(--ink-dim); margin: 0 0 var(--sp-4); }  /* --hc-fs-body 44 */
 .note { font-size: 15px; color: var(--ink-faint); margin: var(--sp-3) 0 0; }  /* --hc-fs-caption 40 */
 .hidden { display: none; }
+
+/* ── The world behind the UI ─────────────────────────────────────────────────────────
+   In the game the UI sits over the running world, and the sage this page falls back to
+   is only the stand-in the project's capture harness paints behind a panel. When a clip
+   is present it plays here instead, full screen, muted and looping, and the page becomes
+   what the game actually looks like.
+
+   It is opt-out by default rather than opt-in: no `src` is set in the markup, so a
+   browser that never runs the script, a reader who asked for less motion, or a phone on
+   a metered connection fetches nothing at all and keeps the flat ground. */
+.bg {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: -1; background: var(--ground);
+  pointer-events: none;
+}
+/* The game hit this exact problem on its hub (hole-city.uss: "white type on a bright sky
+   is not type") and answered on 2026-09-09 with a translucent plate, --hc-surface at 0.5
+   alpha, dark type on paper over the daylight world rather than inverting the contract.
+   Same answer here, and only when a clip is actually playing: the cards are already
+   opaque and need nothing. */
+.plate { margin: 0 0 var(--sp-4); }
+.has-video .plate {
+  background: rgba(251, 248, 237, .5);            /* --hc-surface at 0.5 */
+  border-radius: var(--radius-l);
+  padding: var(--pad);
+  backdrop-filter: blur(2px);
+}
+.has-video .plate > :last-child { margin-bottom: 0; }
+.has-video .plate .head { margin-left: 0; }
+.has-video .press.ghost .face { background: rgba(251, 248, 237, .5); }
 </style>
 </head>
 <body>
+<video class="bg" id="bg" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
 <main>
+  <div class="plate">
   <div class="head">
     <!-- A hole in a patch of ground, in the slot the game's own header keeps for the city
          thumbnail. Drawn rather than set as the 🕳️ emoji the share message carries: at this
@@ -191,6 +223,7 @@ h1 { font-size: 30px; line-height: 1.05; margin: 0 0 var(--sp-3); }  /* --hc-fs-
 
   <h1 class="display" id="title">Come raid my city</h1>
   <p class="lead" id="lead">A friend invited you. Open the game to become friends.</p>
+  </div>
 
   <a class="press primary" id="open" href="#"><span class="display face">Open Hole City</span></a>
 
@@ -276,6 +309,36 @@ h1 { font-size: 30px; line-height: 1.05; margin: 0 0 var(--sp-3); }  /* --hc-fs-
   if (IOS_URL) ios.href = IOS_URL; else ios.setAttribute("aria-disabled", "true");
   if (isIOS) android.parentNode.appendChild(android); // own platform first
   if (isAndroid) ios.parentNode.appendChild(ios);
+
+  // The world behind the UI. Nothing is fetched unless all three say yes: the clip exists,
+  // the visitor has not asked for less motion, and the connection is not metered or slow.
+  // Failing any of them leaves the flat ground, which is a complete design on its own, so
+  // there is no fallback to build and no spinner to show.
+  (function world() {
+    var v = document.getElementById("bg");
+    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var c = navigator.connection || {};
+    var thin = c.saveData === true || /^(slow-)?2g$/.test(c.effectiveType || "");
+    if (still || thin) return;
+    // Two sources rather than one chosen by canPlayType: a browser that says it can play
+    // webm but finds none there has to fall through to the mp4 by itself, and only a
+    // <source> list gives it that. Asking canPlayType and setting one src makes a missing
+    // webm look like a missing clip, which is how this was first written and how it broke.
+    ["webm", "mp4"].forEach(function (ext) {
+      var src = document.createElement("source");
+      src.src = "/hole/assets/video/hole-city-bg." + ext;   // host-relative, same as the fonts
+      src.type = ext === "webm" ? "video/webm" : "video/mp4";
+      v.appendChild(src);
+    });
+    v.load();
+    v.addEventListener("playing", function () { document.body.classList.add("has-video"); });
+    // Nothing is handled on failure on purpose. A 404, a codec refusal and a blocked
+    // autoplay all end the same way: the element never paints a frame, its own background
+    // is the ground, and `has-video` is never set, so the page is exactly the page without
+    // a clip. Verified with the sources 404ing: no error in the console, no layout shift.
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  })();
 
   copy.addEventListener("click", function () {
     var label = copy.querySelector(".face");

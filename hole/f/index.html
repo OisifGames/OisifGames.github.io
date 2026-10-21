@@ -10,8 +10,9 @@
 <meta property="og:site_name" content="Hole City">
 <meta property="og:title" content="Come raid my city in Hole City!">
 <meta property="og:description" content="Tap to become friends and raid each other's cities.">
-<!-- Optional: a 1200x630 picture at /hole/og.png makes the preview card a picture.
-<meta property="og:image" content="https://oisif.io/hole/og.png"> -->
+<!-- Optional: a 1200x630 picture makes the preview card a picture. og:image has to be absolute,
+     so whoever uncomments it writes the host serving this page and no other.
+<meta property="og:image" content="https://oisifgames.com/hole/og.png"> -->
 <!-- iOS Safari banner that opens the app or the App Store; fill the App Store id, then uncomment.
 <meta name="apple-itunes-app" content="app-id=APP_STORE_ID"> -->
 <meta name="robots" content="noindex">
@@ -62,28 +63,44 @@
   <section class="card">
     <h2>New to Hole City? It's free.</h2>
     <div class="stores">
-      <a class="btn" id="ios" href="#">App Store</a>
+      <a class="btn" id="ios" href="#">iPhone soon</a>
       <a class="btn" id="android" href="#">Google Play</a>
     </div>
     <p class="small">Once it's installed, tap your friend's invite link again,
-      or paste it in <b>Friends &rsaquo; Add a friend</b>.</p>
+      or paste it in <b>Friends &rsaquo; Add a friend</b>. The iPhone version is older and cannot take invites yet.</p>
     <button class="btn copy" id="copy" type="button">Copy the invite</button>
   </section>
+
+  <p class="small hidden" id="testing">Hole City is in closed testing right now, so the stores have no
+    public download yet. Ask your friend to get you into the test.</p>
 
   <p class="small hidden" id="bad">This invite link looks incomplete. Ask your friend to send it again.</p>
 </main>
 <script>
 (function () {
   // Fill when the stores have the game; an empty value greys the button out.
-  var APP_STORE_ID = "";                  // digits only, e.g. "1234567890"
+  var APP_STORE_ID = "";                  // 6736468492, deliberately unused: the live iOS build (0.1.3) predates friend links and cannot take an invite.
   var PACKAGE = "com.OisifGames.Hole";
-  var PLAY_URL = "https://play.google.com/store/apps/details?id=" + PACKAGE;
+  // Where a player without the game is sent. This page addresses no host but the one serving it
+  // and the stores, which is deliberate and not to be relaxed. Fill with the Play testing opt-in URL
+  // (https://play.google.com/apps/testing/com.OisifGames.Hole) once the closed track has testers,
+  // or the listing once it is reinstated. Empty greys the button and shows the testing line.
+  var INSTALL_URL = "";
   var IOS_URL = APP_STORE_ID ? "https://apps.apple.com/app/id" + APP_STORE_ID : "";
 
-  // /hole/f/<code>: the inviter's code (a UGS player id). Anything else is refused.
+  // The inviter's code (a UGS player id), in either shared form: /hole/f/<code> here, or
+  // /hole/f/?c=<code> on oisifgames.com, where a static host cannot rewrite a path to a page.
+  // Anything else is refused.
   var m = location.pathname.match(/^\/hole\/f\/([A-Za-z0-9_-]{1,64})\/?$/);
   var code = m ? m[1] : "";
-  var link = "https://oisif.io/hole/f/" + code;
+  if (!code) {
+    var q = /[?&]c=([^&#]*)/.exec(location.search || "");
+    try { code = q ? decodeURIComponent(q[1]) : ""; } catch (e) { code = ""; }
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(code)) code = "";
+  }
+  // The link to hand back, rebuilt on whatever host served this page and in the form it arrived
+  // in, so no domain is hardcoded and the copy always matches what the friend shared.
+  var link = location.origin + (m ? "/hole/f/" + code : "/hole/f/?c=" + encodeURIComponent(code));
   var ua = navigator.userAgent || "";
   var isAndroid = /Android/i.test(ua);
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
@@ -97,15 +114,17 @@
     open.classList.add("hidden");
     document.getElementById("copy").classList.add("hidden");
   } else if (isAndroid) {
-    // Opens the app through its oisifhole intent filter, or the Play Store when it is missing.
+    // Opens the app through its oisifhole intent filter. No browser fallback while INSTALL_URL is
+    // empty: Android then just stays on this page, which is the intended behaviour.
     open.href = "intent://friend/" + code + "#Intent;scheme=oisifhole;package=" + PACKAGE +
-      ";S.browser_fallback_url=" + encodeURIComponent(PLAY_URL) + ";end";
+      (INSTALL_URL ? ";S.browser_fallback_url=" + encodeURIComponent(INSTALL_URL) : "") + ";end";
   } else {
     // iOS: Safari asks to open the app. Not tried automatically: without the app it shows an error.
     open.href = "oisifhole://friend/" + code;
   }
 
-  android.href = PLAY_URL;
+  if (INSTALL_URL) android.href = INSTALL_URL;
+  else { android.setAttribute("aria-disabled", "true"); document.getElementById("testing").classList.remove("hidden"); }
   if (IOS_URL) ios.href = IOS_URL; else ios.setAttribute("aria-disabled", "true");
   if (isIOS) android.parentNode.appendChild(android); // own platform first
   if (isAndroid) ios.parentNode.appendChild(ios);

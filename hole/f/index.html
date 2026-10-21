@@ -16,65 +16,196 @@
 <!-- iOS Safari banner that opens the app or the App Store; fill the App Store id, then uncomment.
 <meta name="apple-itunes-app" content="app-id=APP_STORE_ID"> -->
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#f6efe2">
+<meta name="theme-color" content="#b3ccbd">
+<link rel="preload" href="/hole/assets/fonts/barlow-condensed-black.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root {
-    --paper: #f6efe2; --ink: #1d1a24; --dim: #6b6474; --accent: #ff6a3d; --accent-ink: #ffffff;
-    --card: #fffaf1; --line: #e4d9c6;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --paper: #17141d; --ink: #f4eee6; --dim: #a69eb0; --card: #221e2a; --line: #353042; }
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--paper); color: var(--ink); }
-  body {
-    font: 17px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
-  }
-  main { width: 100%; max-width: 420px; text-align: center; }
-  .hole { font-size: 64px; line-height: 1; margin-bottom: 8px; }
-  h1 { font-size: 28px; line-height: 1.15; margin: 0 0 8px; }
-  p { margin: 0 0 20px; color: var(--dim); }
-  .btn {
-    display: block; width: 100%; padding: 16px 20px; margin: 0 0 12px; border-radius: 16px;
-    font-weight: 700; font-size: 18px; text-decoration: none; border: 0; cursor: pointer;
-  }
-  .primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 4px 0 #c94a22; }
-  .primary:active { transform: translateY(3px); box-shadow: 0 1px 0 #c94a22; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-top: 8px; }
-  .card h2 { font-size: 17px; margin: 0 0 12px; }
-  .stores { display: flex; gap: 10px; }
-  .stores .btn { margin: 0; font-size: 15px; background: var(--ink); color: var(--paper); }
-  .stores .btn[aria-disabled="true"] { opacity: .4; pointer-events: none; }
-  .small { font-size: 14px; color: var(--dim); margin: 14px 0 0; }
-  .copy { background: transparent; color: var(--ink); border: 1px solid var(--line); font-size: 15px; margin-top: 12px; }
-  .hidden { display: none; }
+/* The game's look, ported. Every token below is Assets/Oisif/Content/UI/Toolkit/theme.uss, the
+ * one source of colour, type, shape and depth in Hole City, converted from its 1080-unit
+ * reference frame to this page's 420px column: 1 unit = 0.389 px. The game unit is in the
+ * comment beside each value, so a theme change here is a lookup rather than a guess.
+ * The game has one look and no dark scheme, so this page has none either. */
+@font-face {
+  font-family: 'HC Display';          /* --hc-font-display: BarlowCondensed-Black */
+  src: url('/hole/assets/fonts/barlow-condensed-black.woff2') format('woff2');
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HC Body';             /* --hc-font-body: Nunito SemiBold */
+  src: url('/hole/assets/fonts/nunito-semibold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* Ink */
+  --ink: #161f35;                     /* --hc-ink */
+  --ink-dim: #404e68;                 /* --hc-ink-dim */
+  --ink-faint: #626e84;               /* --hc-ink-faint */
+  /* Paper */
+  --surface: #fbf8ed;                 /* --hc-surface, the cream card */
+  --surface-2: #f2ecda;               /* --hc-surface-2, a pressed face */
+  --surface-3: #e2dbc6;               /* --hc-surface-3, hairline */
+  /* The ground. The game draws its world here; every UI capture the project takes stands it in
+   * with this sage (Editor/UiGateShots.cs colorClearValue 0.70 0.80 0.74), so it is what the
+   * cream cards are designed to sit on. */
+  --ground: #b3ccbd;
+  /* Accents */
+  --lime: #d0f262;                    /* --hc-lime, the PLAY green */
+  --lime-pressed: #bcde50;            /* --hc-lime-tint-pressed */
+  --gold: #ffd666;                    /* --hc-gold */
+
+  /* Shape, 1080 units in the comment */
+  --radius-m: 13px;                   /* --hc-radius-m 32: row, button */
+  --radius-l: 16px;                   /* --hc-radius-l 40: card */
+  --control: 60px;                    /* --hc-control-height 154 */
+  --pad: 16px;                        /* --hc-pad 42 */
+  --sp-1: 3px;                        /* --hc-space-1 8 */
+  --sp-2: 6px;                        /* --hc-space-2 16 */
+  --sp-3: 9px;                        /* --hc-space-3 24 */
+  --sp-4: 16px;                       /* --hc-space-4 42 */
+  --sp-5: 25px;                       /* --hc-space-5 64 */
+
+  /* Depth: the hatched cast shadow, offset down and right of the face. */
+  --shadow-x: 2.5px;                  /* --hc-shadow-x 7 */
+  --shadow-y: 5.5px;                  /* --hc-shadow-offset 15 */
+  /* The drawn outline. In the game it is one device pixel whatever the screen: a 1080-wide
+     render of a 390pt screen puts it at 1 px, which is 0.36 CSS px. A browser snaps any border
+     under 1 CSS px up to a whole one, so the width cannot be matched and the ink is matched
+     instead: a 1 px border at the alpha that leaves about the same amount of dark on the edge.
+     Measured off the same capture, that edge is near-black on cream and an olive blend on the
+     lime, which is why the accent carries its own. */
+  --edge: 1px;
+  --edge-ink: rgba(22, 31, 53, .45);
+  --edge-ink-accent: rgba(22, 31, 53, .3);
+
+  /* Motion */
+  --t-press: 90ms;                    /* --hc-t-press */
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--ground); color: var(--ink);
+  font: 600 17px/1.4 'HC Body', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: max(var(--sp-5), env(safe-area-inset-top)) var(--sp-4) max(var(--sp-5), env(safe-area-inset-bottom));
+}
+main { width: 100%; max-width: 420px; }
+
+/* Display type: the game sets its condensed face on titles, CTAs and tabs, always caps,
+ * always on the ink colour, never white on an accent (--hc-ink-on-accent). */
+.display {
+  font-family: 'HC Display', 'Arial Narrow', Impact, sans-serif;
+  font-weight: 900; text-transform: uppercase; letter-spacing: 0.01em;
+}
+
+/* ── The screen header: the game's mark and name, the way a screen names itself ── */
+.head { display: flex; align-items: center; gap: var(--sp-3); margin: 0 0 var(--sp-4) var(--sp-1); }
+.head svg { width: 42px; height: 42px; display: block; flex: none; }
+.head .name { font-size: 26px; line-height: 1; margin: 0; }  /* --hc-fs-home-name 68 */
+
+/* ── The pressable: a cream face over a hatched cast shadow. Pressing moves the face down
+      onto the shadow by exactly the shadow offset, which is what the game does. ──────── */
+.press {
+  position: relative; display: block; width: 100%; min-height: var(--control);
+  margin: 0 0 calc(var(--shadow-y) + var(--sp-3));
+  border: 0; padding: 0; background: none; cursor: pointer;
+  color: inherit; text-decoration: none; font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+/* The cast shadow is a drawn contour offset down and right, with a fringe of hatch ticks along
+   its bottom edge. It has no fill: the ground shows through the crescent, which is what the
+   UiHatch material draws in the game. */
+.press::before {
+  content: ''; position: absolute; inset: 0;
+  transform: translate(var(--shadow-x), var(--shadow-y));
+  border: var(--edge) solid var(--edge-ink); border-radius: var(--radius-m);
+  background-image: repeating-linear-gradient(72deg,
+    rgba(22,31,53,.6) 0 .5px, transparent .5px 3.5px);
+  background-size: 100% 4px; background-position: left bottom; background-repeat: repeat-x;
+}
+.press .face {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  gap: var(--sp-2); min-height: var(--control); padding: var(--sp-3) var(--sp-4);
+  background: var(--surface); color: var(--ink);
+  border: var(--edge) solid var(--edge-ink); border-radius: var(--radius-m);
+  transition: transform var(--t-press) ease-out;
+}
+.press:active .face { transform: translate(var(--shadow-x), var(--shadow-y)); background: var(--surface-2); }
+.press:active::before { opacity: 0; }
+.press.primary::before { border-radius: var(--radius-l); }
+.press:focus-visible .face { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* The primary commit is the PLAY green, and its type is ink, never white. */
+.press.primary .face { background: var(--lime); border-color: var(--edge-ink-accent);
+  border-radius: var(--radius-l); font-size: 25px; }    /* --hc-fs-cta 64, the card radius: a commit is a face, not a row */
+.press.primary:active .face { background: var(--lime-pressed); }
+
+/* Secondary pressables sit in a row and carry the smaller CTA size. */
+.press.small .face { min-height: 47px; font-size: 19px; padding: var(--sp-2) var(--sp-3); }  /* --hc-tap-min 120, --hc-fs-label 50 */
+.press.small { min-height: 47px; }
+.row { display: flex; gap: var(--sp-3); }
+.row .press { flex: 1; }
+.press[aria-disabled="true"] { pointer-events: none; }
+.press[aria-disabled="true"] .face { color: var(--ink-faint); background: var(--surface-2); }
+.press[aria-disabled="true"]::before { display: none; }
+
+/* A ghost pressable: the game's --hc-btn--ghost, no face fill, outline only, no shadow,
+   because it is the quiet option. */
+.press.ghost { margin-bottom: 0; }
+.press.ghost::before { display: none; }
+.press.ghost .face {
+  background: transparent; border-color: var(--ink-faint); color: var(--ink-dim);
+  min-height: 47px; font-size: 19px;
+}
+.press.ghost:active .face { background: rgba(22,31,53,.06); transform: none; }  /* --hc-ink-wash */
+
+/* ── Cards. Fc's rule, from Look/look.uss: a card that only shows facts casts no shadow;
+      only something you can tap does. So this one is outlined and flat, and the buttons
+      inside it carry the depth. ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface); border: var(--edge) solid var(--edge-ink); border-radius: var(--radius-l);
+  padding: var(--pad); margin: 0 0 var(--sp-4);
+}
+.card > :last-child { margin-bottom: 0; }
+.card .title { font-size: 19px; margin: 0 0 var(--sp-3); }   /* --hc-fs-label 50 */
+
+h1 { font-size: 30px; line-height: 1.05; margin: 0 0 var(--sp-3); }  /* --hc-fs-screen-title 76 */
+.lead { font-size: 17px; color: var(--ink-dim); margin: 0 0 var(--sp-4); }  /* --hc-fs-body 44 */
+.note { font-size: 15px; color: var(--ink-faint); margin: var(--sp-3) 0 0; }  /* --hc-fs-caption 40 */
+.hidden { display: none; }
 </style>
 </head>
 <body>
 <main>
-  <div class="hole" aria-hidden="true">🕳️</div>
-  <h1 id="title">Come raid my city!</h1>
-  <p id="lead">A friend invited you to Hole City. Open the game to become friends.</p>
+  <div class="head">
+    <!-- A hole in a patch of ground, in the slot the game's own header keeps for the city
+         thumbnail. Drawn rather than set as the 🕳️ emoji the share message carries: at this
+         size the system emoji is another vendor's artwork, in another vendor's palette. -->
+    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <rect x="1.4" y="1.4" width="45.2" height="45.2" rx="11" fill="#fbf8ed" stroke="#161f35" stroke-opacity=".45" stroke-width="2.2"/>
+      <ellipse cx="24" cy="27" rx="14" ry="9.5" fill="#161f35"/>
+    </svg>
+    <p class="display name">Hole City</p>
+  </div>
 
-  <a class="btn primary" id="open" href="#">Open Hole City</a>
+  <h1 class="display" id="title">Come raid my city</h1>
+  <p class="lead" id="lead">A friend invited you. Open the game to become friends.</p>
 
-  <section class="card">
-    <h2>New to Hole City? It's free.</h2>
-    <div class="stores">
-      <a class="btn" id="ios" href="#">iPhone soon</a>
-      <a class="btn" id="android" href="#">Google Play</a>
+  <a class="press primary" id="open" href="#"><span class="display face">Open Hole City</span></a>
+
+  <section class="card" id="getit">
+    <p class="title">New here? It&rsquo;s free.</p>
+    <div class="row">
+      <a class="press small" id="android" href="#"><span class="display face">Google Play</span></a>
+      <a class="press small" id="ios" href="#"><span class="display face">iPhone soon</span></a>
     </div>
-    <p class="small">Once it's installed, tap your friend's invite link again,
-      or paste it in <b>Friends &rsaquo; Add a friend</b>. The iPhone version is older and cannot take invites yet.</p>
-    <button class="btn copy" id="copy" type="button">Copy the invite</button>
+    <p class="note" id="after">Install it, then tap this link again.</p>
+    <p class="note hidden" id="testing">Hole City is in closed testing. Ask your friend to get you in.</p>
   </section>
 
-  <p class="small hidden" id="testing">Hole City is in closed testing right now, so the stores have no
-    public download yet. Ask your friend to get you into the test.</p>
+  <button class="press ghost" id="copy" type="button"><span class="display face">Copy the link</span></button>
 
-  <p class="small hidden" id="bad">This invite link looks incomplete. Ask your friend to send it again.</p>
 </main>
 <script>
 (function () {
@@ -118,11 +249,18 @@
   var open = document.getElementById("open");
   var ios = document.getElementById("ios");
   var android = document.getElementById("android");
+  var copy = document.getElementById("copy");
+
+  function show(id, on) { document.getElementById(id).classList[on ? "remove" : "add"]("hidden"); }
 
   if (!code) {
-    document.getElementById("bad").classList.remove("hidden");
+    // No readable code: the headline becomes the problem, rather than a notice under a dead
+    // button. The store card stays, because installing the game is still worth doing.
     open.classList.add("hidden");
-    document.getElementById("copy").classList.add("hidden");
+    copy.classList.add("hidden");
+    document.getElementById("title").textContent = "This invite is broken";
+    document.getElementById("lead").textContent = "Ask your friend to send the link again.";
+    document.getElementById("after").classList.add("hidden");
   } else if (isAndroid) {
     // Opens the app through its oisifhole intent filter. No browser fallback while INSTALL_URL is
     // empty: Android then just stays on this page, which is the intended behaviour.
@@ -134,14 +272,15 @@
   }
 
   if (INSTALL_URL) android.href = INSTALL_URL;
-  else { android.setAttribute("aria-disabled", "true"); document.getElementById("testing").classList.remove("hidden"); }
+  else { android.setAttribute("aria-disabled", "true"); show("testing", true); show("after", false); }
   if (IOS_URL) ios.href = IOS_URL; else ios.setAttribute("aria-disabled", "true");
   if (isIOS) android.parentNode.appendChild(android); // own platform first
   if (isAndroid) ios.parentNode.appendChild(ios);
 
-  document.getElementById("copy").addEventListener("click", function () {
-    var b = this;
-    function done() { b.textContent = "Copied! Paste it in Friends"; }
+  copy.addEventListener("click", function () {
+    var label = copy.querySelector(".face");
+    // "link copied" is what the game's own share button says once it has copied (HoleCityRouter).
+    function done() { label.textContent = "Link copied"; }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done, done);
     else { var t = document.createElement("textarea"); t.value = link; document.body.appendChild(t); t.select();
       try { document.execCommand("copy"); } catch (e) {} document.body.removeChild(t); done(); }

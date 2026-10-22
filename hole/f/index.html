@@ -320,11 +320,14 @@ h1 { font-size: 30px; line-height: 1.05; margin: 0 0 var(--sp-3); }  /* --hc-fs-
     var c = navigator.connection || {};
     var thin = c.saveData === true || /^(slow-)?2g$/.test(c.effectiveType || "");
     if (still || thin) return;
-    // Two sources rather than one chosen by canPlayType: a browser that says it can play
-    // webm but finds none there has to fall through to the mp4 by itself, and only a
-    // <source> list gives it that. Asking canPlayType and setting one src makes a missing
-    // webm look like a missing clip, which is how this was first written and how it broke.
-    ["webm", "mp4"].forEach(function (ext) {
+    // One source, mp4, and no webm at all. Measured 2026-10-21 on a 720x1280 30 fps cut of
+    // this same content: H.264 CRF 28 is 1,243,881 bytes and VP9 needs CRF 54 to come near
+    // it and is still larger, because dense low-poly foliage under camera motion is what
+    // VP9's defaults handle worst. Listing webm first therefore served the bigger file to
+    // every browser that supports both. The <source> list stays a list so a future second
+    // encode is an append, and a browser that cannot play it falls through to no clip,
+    // which is the flat ground and a complete design on its own.
+    ["mp4"].forEach(function (ext) {
       var src = document.createElement("source");
       src.src = "/hole/assets/video/hole-city-bg." + ext;   // host-relative, same as the fonts
       src.type = ext === "webm" ? "video/webm" : "video/mp4";

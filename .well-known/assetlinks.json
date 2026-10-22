@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.OisifGames.Hole",
       "sha256_cert_fingerprints": [
-        "DC:A7:8A:2C:E1:3C:69:FC:9C:97:46:93:7A:2A:2A:F6:AB:C1:C6:79:9A:08:71:1D:E6:F5:41:CC:17:93:02:23"
+        "DC:A7:8A:2C:E1:3C:69:FC:9C:97:46:93:7A:2A:2A:F6:AB:C1:C6:79:9A:08:71:1D:E6:F5:41:CC:17:93:02:23",
+        "89:93:28:17:68:ED:62:2E:CF:94:EB:89:91:E7:09:B9:2E:90:8E:C3:0B:BB:11:1C:78:DF:3B:F4:FA:0D:8E:2B"
       ]
     }
   }

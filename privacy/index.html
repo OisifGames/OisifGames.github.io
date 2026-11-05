@@ -154,8 +154,8 @@
       <tr>
         <td>Unity Diagnostics</td>
         <td>Unity Technologies</td>
-        <td>Receives crash reports, exception logs, telemetry and app-not-responding
-            reports from your device so we can fix crashes. See
+        <td>From version 1.0.0, receives crash reports, exception logs, telemetry and
+            app-not-responding reports from your device so we can fix crashes. See
             <a href="#crash">Crash reports</a> below</td>
         <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Policy</a></td>
       </tr>
@@ -221,15 +221,16 @@
        you accept the consent card described under
        <a href="#ads">Advertising and your choices</a>. That card is about ads. If
        you refuse it, these are not sent. One anonymous event is sent whatever you
-       answer: the step reached in your first session, with the install ID and the
-       device and app information, and without the player ID. We are still checking
-       with legal advice what basis covers that event.</p>
+       answer: the step reached in your first session and the seconds since launch,
+       with the install ID and the device and app information, and without the
+       player ID or the advertising identifier. We send it under legitimate
+       interests, to see where new players stop playing so that we can fix it.</p>
 
     <p>When you send feedback we store a one-way hash of your IP address to stop
        abuse, not the address itself. That applies to feedback only. The server
        also keeps standard web server access logs, which contain the IP address of
-       every request, and we do not currently set a retention period for them that
-       we can state here.</p>
+       every request. They are rotated daily and the last 14 are kept, so an
+       address stays in them for about two weeks.</p>
 
     <p>If our server cannot be reached, the game asks francoiscorbel.com, a website
        run by the developer of Oisif Games, for the current time. That request
@@ -242,7 +243,7 @@
 
     <h2 id="crash">Crash reports</h2>
 
-    <p>Crash reports go to Unity through Unity Diagnostics. A report can contain
+    <p>From version 1.0.0, crash reports go to Unity through Unity Diagnostics. A report can contain
        crash and exception logs, telemetry and information about the device and
        the game version. Unity acts as our processor and identifies the data with
        its own installation ID, which is not the install ID or Cloud ID described
@@ -286,13 +287,11 @@
       <li><strong>Performance of a contract:</strong> running the game, saving
           your progress, operating leaderboards and raids, and delivering
           purchases.</li>
-      <li><strong>Legitimate interests:</strong> crash reports to Unity, registering
+      <li><strong>Legitimate interests:</strong> crash reports to Unity, the anonymous
+          first-session event, registering
           your device with the push service, preventing fraud and abuse, and
           non-personalised advertising that keeps the game free.</li>
     </ul>
-
-    <p>The anonymous first-session event described above is not placed under any
-       of these yet.</p>
 
     <h2>How long we keep it</h2>
 
@@ -300,8 +299,8 @@
        and feedback on our own server are kept until you ask us to delete them or
        until a clean-up removes them; we aim for 24 months, but that clean-up is
        run by hand and not on a schedule, so some data can stay longer. Saved
-       progress is kept until you delete it, and we do not currently run an
-       automatic deletion of inactive accounts. Our third-party providers apply
+       progress is kept until you delete it, and we do not run an
+       automatic deletion of inactive accounts ourselves. Our third-party providers apply
        their own retention periods, described in their policies above.</p>
 
     <h2>Where your data goes</h2>

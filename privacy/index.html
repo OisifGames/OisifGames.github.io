@@ -42,13 +42,14 @@
   <section>
   <div class="wrap doc">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated 22 October 2026</p>
+    <p class="updated">Last updated 5 November 2026</p>
 
     <p>This policy covers the mobile games published by Oisif Games, including
        <strong>Hole City</strong>. It describes what the games collect, which
        third-party services receive it, and what you can ask us to do about it.</p>
 
-    <p>We do not ask you to create an account, and we never ask for your name,
+    <p>We do not ask you to create an account: the game creates an anonymous
+       player account for you automatically. We never ask for your real name,
        email address, phone number or postal address inside a game.</p>
 
     <h2>What the games collect</h2>
@@ -66,9 +67,18 @@
         <td>Serving and measuring ads</td>
       </tr>
       <tr>
-        <td>Anonymous player ID</td>
-        <td>A random identifier generated on first launch</td>
-        <td>Saving your progress and showing leaderboards</td>
+        <td>Anonymous identifiers</td>
+        <td>A random install ID generated on first launch, and the player ID of
+            your anonymous player account (shown as <em>Cloud ID</em> in the
+            game's settings, next to the install ID)</td>
+        <td>Saving your progress, showing leaderboards, and finding your data
+            when you ask us about it</td>
+      </tr>
+      <tr>
+        <td>Public profile</td>
+        <td>The display name and flag you choose, your city, your scores and
+            raid results</td>
+        <td>Leaderboards and raids, where other players see them</td>
       </tr>
       <tr>
         <td>Device and app information</td>
@@ -82,18 +92,26 @@
       </tr>
       <tr>
         <td>Diagnostics</td>
-        <td>Crash reports and error logs</td>
+        <td>Crash reports, which go to Unity, and error logs, which go to our own
+            server</td>
         <td>Fixing bugs</td>
       </tr>
       <tr>
         <td>Feedback you send</td>
-        <td>A message you write in the game, and a screenshot if you attach one</td>
+        <td>A message you write in the game and a screenshot if you attach one.
+            The game adds your Cloud ID, install ID, city name, player and city
+            level, device model, operating system, language and screen size</td>
         <td>Reading what you report and answering it</td>
       </tr>
       <tr>
         <td>Push notification token</td>
         <td>A subscription identifier issued by the notification service</td>
         <td>Sending notifications, if you allow them</td>
+      </tr>
+      <tr>
+        <td>Purchase history</td>
+        <td>Which in-game items you bought, and when</td>
+        <td>Delivering and restoring purchases</td>
       </tr>
     </table>
     </div>
@@ -103,8 +121,8 @@
 
     <h2>Third-party services in our games</h2>
 
-    <p>These are the software development kits embedded in our games. Each one is
-       operated by the company named, under that company's own privacy policy.</p>
+    <p>These are the software development kits and services in our games. Each one
+       is operated by the company named, under that company's own privacy policy.</p>
 
     <div class="table-scroll">
     <table>
@@ -123,13 +141,8 @@
       <tr>
         <td>Unity Ads</td>
         <td>Unity Technologies</td>
-        <td>Serving and measuring ads</td>
-        <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Policy</a></td>
-      </tr>
-      <tr>
-        <td>Unity Gaming Services Analytics</td>
-        <td>Unity Technologies</td>
-        <td>Gameplay analytics</td>
+        <td>Serving and measuring ads. It is the only ad network built into our
+            games; which networks LevelPlay may call is set in its dashboard</td>
         <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Policy</a></td>
       </tr>
       <tr>
@@ -139,37 +152,109 @@
         <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Policy</a></td>
       </tr>
       <tr>
+        <td>Unity Diagnostics</td>
+        <td>Unity Technologies</td>
+        <td>Receives crash reports, exception logs, telemetry and app-not-responding
+            reports from your device so we can fix crashes. See
+            <a href="#crash">Crash reports</a> below</td>
+        <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Policy</a></td>
+      </tr>
+      <tr>
+        <td>Unity In-App Purchasing</td>
+        <td>Unity Technologies</td>
+        <td>Connects the game to the App Store and Google Play for purchases and
+            checks receipts on your device</td>
+        <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Policy</a></td>
+      </tr>
+      <tr>
+        <td>Unity engine</td>
+        <td>Unity Technologies</td>
+        <td>Anonymous hardware statistics (device model, graphics, memory)</td>
+        <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Policy</a></td>
+      </tr>
+      <tr>
         <td>OneSignal</td>
         <td>OneSignal, Inc.</td>
-        <td>Push notifications</td>
+        <td>Push notifications, delivered through Apple's push service on iOS and
+            Google's Firebase Cloud Messaging on Android</td>
         <td><a href="https://onesignal.com/privacy_policy">Policy</a></td>
       </tr>
       <tr>
-        <td>Facebook SDK</td>
+        <td>Meta SDK (Facebook SDK)</td>
         <td>Meta Platforms, Inc.</td>
-        <td>Optional login and sharing, install attribution</td>
-        <td><a href="https://www.facebook.com/about/privacy">Policy</a></td>
+        <td>Install and in-app event measurement for our advertising, including
+            purchase events. The whole SDK is installed (Core, Login, Share,
+            Gaming Services and App Links, on Android and iOS), but the game
+            calls only its startup and event measurement. It does not use Facebook
+            login or sharing, and Meta does not show ads in our games</td>
+        <td><a href="https://www.facebook.com/privacy/policy/">Policy</a></td>
+      </tr>
+      <tr>
+        <td>App Store / Google Play (purchases, Install Referrer, In-App Review)</td>
+        <td>Apple Inc. / Google LLC</td>
+        <td>Processing purchases, the store that referred the install (Android),
+            the rating prompt</td>
+        <td><a href="https://www.apple.com/legal/privacy/">Apple</a> &middot;
+            <a href="https://policies.google.com/privacy">Google</a></td>
+      </tr>
+      <tr>
+        <td>Server hosting</td>
+        <td>Hetzner Online GmbH, Nuremberg, Germany</td>
+        <td>Hosts the server described under <a href="#own">What we keep ourselves</a></td>
+        <td><a href="https://www.hetzner.com/legal/privacy-policy">Policy</a></td>
       </tr>
     </table>
     </div>
 
-    <h2>What we keep ourselves</h2>
+    <h2 id="own">What we keep ourselves</h2>
 
-    <p>Oisif Games also receives the gameplay events and any feedback you send,
-       on a server we operate in Germany. The events carry the anonymous player ID
-       and the device and app information described above. They never carry the
-       advertising identifier. When you send feedback we keep a one-way hash of
-       your IP address to stop abuse, not the address itself. We use this copy to
-       understand how the game is played, to fix what you report, and to tune the
-       game. This copy does not wait on the consent prompt: it is collected whatever
-       you answer, on the basis of our legitimate interest in running and fixing the
-       game, and you can object to it or ask us to erase it by writing to us. A backup is kept on equipment we control, and a deletion reaches it
-       within 30 days.</p>
+    <p>Oisif Games runs its own server at oisif.io, hosted by Hetzner in Nuremberg,
+       Germany. It receives gameplay events, error logs and any feedback you send.
+       Events carry the install ID, a hashed form of your player ID (not the Cloud
+       ID itself) and the device and app information described above. They never
+       carry the advertising identifier. We use this copy to understand how the
+       game is played, to fix what you report, and to tune the game. A backup is
+       kept on equipment we control, and a deletion reaches it within 30
+       days.</p>
 
-    <p>We do not sell your personal data, and we do not share it with anyone
-       outside the services listed above.</p>
+    <p>The game sends identified events and error logs to this server only after
+       you accept the consent card described under
+       <a href="#ads">Advertising and your choices</a>. That card is about ads. If
+       you refuse it, these are not sent. One anonymous event is sent whatever you
+       answer: the step reached in your first session, with the install ID and the
+       device and app information, and without the player ID. We are still checking
+       with legal advice what basis covers that event.</p>
 
-    <h2>Advertising and your choices</h2>
+    <p>When you send feedback we store a one-way hash of your IP address to stop
+       abuse, not the address itself. That applies to feedback only. The server
+       also keeps standard web server access logs, which contain the IP address of
+       every request, and we do not currently set a retention period for them that
+       we can state here.</p>
+
+    <p>If our server cannot be reached, the game asks francoiscorbel.com, a website
+       run by the developer of Oisif Games, for the current time. That request
+       reaches the site like any web request and so includes your IP address.</p>
+
+    <p>We do not sell your personal data for money, and we do not share it with
+       anyone outside the services listed above. Under some US state laws, letting
+       ad partners use identifiers for personalised ads counts as a "sale" or
+       "sharing"; see <a href="#us">US residents</a> below.</p>
+
+    <h2 id="crash">Crash reports</h2>
+
+    <p>Crash reports go to Unity through Unity Diagnostics. A report can contain
+       crash and exception logs, telemetry and information about the device and
+       the game version. Unity acts as our processor and identifies the data with
+       its own installation ID, which is not the install ID or Cloud ID described
+       above and which the game does not show you.</p>
+
+    <p>Unity keeps this data for 90 days by default. There is no setting in the
+       game to turn crash reporting off, and Unity does not provide a consent
+       option for it. You can write to us to object. Because we cannot look up one
+       player's reports without that Unity ID, we cannot currently delete them on
+       request; they expire on their own after the retention period.</p>
+
+    <h2 id="ads">Advertising and your choices</h2>
 
     <p>Our games are free and funded by advertising. Ads may be personalised using
        your device advertising identifier.</p>
@@ -178,34 +263,46 @@
       <li><strong>On iOS</strong>, the game asks for permission before any tracking
           identifier is used. If you decline, or if you have turned off
           <em>Allow Apps to Request to Track</em> in your device settings, ads are
-          shown without the advertising identifier.</li>
+          shown without the advertising identifier. The Meta measurement events
+          also stay off.</li>
       <li><strong>On Android</strong>, you can reset or delete your Advertising ID
           in Settings &rarr; Google &rarr; Ads.</li>
-      <li><strong>Everywhere</strong>, a consent prompt appears on first launch.
-          Unity Gaming Services Analytics runs only if you give it, and you can
-          change your answer at any time from the game's settings screen.</li>
+      <li><strong>Everywhere</strong>, the game shows a consent card about
+          personalised ads after your first run. Personalised ads, the Meta
+          measurement events, and the identified events and error logs we send to
+          our own server run only if you accept. If you refuse, you still get
+          every feature and see non-personalised ads. You can change your answer
+          at any time with the <em>Personalised ads</em> row of the game's
+          settings screen, which carries the label <em>Your privacy choices</em>.</li>
     </ul>
 
     <h2>Legal bases (EEA, UK and Switzerland)</h2>
 
     <ul>
-      <li><strong>Consent</strong>: personalised advertising, Unity Gaming
-          Services Analytics, and push notifications.</li>
-      <li><strong>Performance of a contract</strong>: running the game, saving
-          your progress and operating leaderboards.</li>
-      <li><strong>Legitimate interests</strong>: our own copy of gameplay events
-          and diagnostics described above, fixing crashes, preventing fraud and
-          abuse, and non-personalised advertising that keeps the game free.</li>
+      <li><strong>Consent:</strong> personalised advertising, Meta measurement
+          events, showing push notifications, and the identified events and error
+          logs sent to our own server, which the game sends only after you
+          accept the consent card.</li>
+      <li><strong>Performance of a contract:</strong> running the game, saving
+          your progress, operating leaderboards and raids, and delivering
+          purchases.</li>
+      <li><strong>Legitimate interests:</strong> crash reports to Unity, registering
+          your device with the push service, preventing fraud and abuse, and
+          non-personalised advertising that keeps the game free.</li>
     </ul>
+
+    <p>The anonymous first-session event described above is not placed under any
+       of these yet.</p>
 
     <h2>How long we keep it</h2>
 
-    <p>Gameplay and analytics data is retained for up to 24 months, and that
-       includes our own copy and the feedback you send. Crash reports
-       are retained for up to 12 months. Saved progress is kept while the player
-       account stays active and for 24 months after the last session, then
-       deleted. Our third-party providers apply their own retention periods,
-       described in their policies above.</p>
+    <p>Crash reports at Unity are kept for 90 days by default. Gameplay events
+       and feedback on our own server are kept until you ask us to delete them or
+       until a clean-up removes them; we aim for 24 months, but that clean-up is
+       run by hand and not on a schedule, so some data can stay longer. Saved
+       progress is kept until you delete it, and we do not currently run an
+       automatic deletion of inactive accounts. Our third-party providers apply
+       their own retention periods, described in their policies above.</p>
 
     <h2>Where your data goes</h2>
 
@@ -213,6 +310,70 @@
        servers in the European Union and the United States. Transfers outside the EEA rely on the European
        Commission's standard contractual clauses or an adequacy decision, as set
        out in each provider's policy.</p>
+
+    <h2 id="delete">Deleting your data (Hole City and other Oisif Games)</h2>
+
+    <p>To have your data deleted, email
+       <a href="mailto:support@oisifgames.com">support@oisifgames.com</a> with the
+       subject <em>Data deletion</em>. Quote the install ID and the Cloud ID, which
+       the game shows in Settings (you can copy them from there). The install ID
+       is how we find your gameplay events, so please send both. We delete what we
+       hold within 30 days, including our own copy of your gameplay events and
+       feedback. This also works after you uninstall the game, if you kept the two
+       IDs.</p>
+
+    <p>The game has a <em>Delete my data</em> row in Settings. It asks our cloud
+       provider to delete your saved progress, public profile, leaderboard entries,
+       your own raid records and your anonymous player account, and it clears the
+       IDs and local data on your device. It depends on a server step that we
+       have not confirmed is working, so use the email route first. If the game
+       shows <em>Could not delete your data</em>, nothing was deleted. The row
+       also does not reach our own server's events or feedback, and it removes
+       the IDs we ask for in the email from your device, so copy them before you
+       use it. Other players' raid records that name you may keep your player
+       ID.</p>
+
+    <p>We cannot currently delete a single player's crash reports held by Unity
+       (see <a href="#crash">Crash reports</a>); they expire after 90 days.</p>
+
+    <h2 id="us">US residents (California and other states)</h2>
+
+    <p><strong>Do not sell or share my personal information.</strong> To opt out,
+       open the game's Settings and turn off the row <em>Personalised ads</em>,
+       labelled <em>Your privacy choices</em>. When it is off, you see
+       non-personalised ads and we tell Meta to apply Limited Data Use to the
+       events it receives. Turning it off changes nothing else in the game. Apart
+       from that row, the game tells LevelPlay that data is not to be sold for
+       every player, whatever the answer.</p>
+
+    <p>In the last 12 months we collected these categories of personal
+       information, from you and your device, for the purposes described above:</p>
+
+    <ul>
+      <li><strong>Identifiers:</strong> advertising ID, install ID, player ID,
+          push token, IP address.</li>
+      <li><strong>Internet or other electronic network activity:</strong>
+          gameplay events and ad interactions.</li>
+      <li><strong>Approximate geolocation:</strong> country, inferred from your
+          IP address.</li>
+      <li><strong>Commercial information:</strong> purchase history.</li>
+      <li><strong>Content you create:</strong> your display name, city and
+          feedback, and any screenshot you attach.</li>
+    </ul>
+
+    <p>Identifiers and network activity are shared with Unity (LevelPlay and
+       Unity Ads) and Meta for advertising, which may count as a "sale" or
+       "sharing" under California law. We do not knowingly sell or share the
+       personal information of anyone under 16. We do not collect sensitive
+       personal information.</p>
+
+    <p>You have the right to know what we collect and to get a copy, to delete
+       it, to correct it, to opt out of its sale or sharing, and not to be
+       treated differently for using any of these rights. Use the settings row
+       above, or email
+       <a href="mailto:support@oisifgames.com">support@oisifgames.com</a> with
+       your install ID and Cloud ID. Someone you authorise can make the request
+       for you. We answer within 30 days.</p>
 
     <h2>Children</h2>
 
@@ -230,9 +391,9 @@
        within 30 days.</p>
 
     <p>Write to <a href="mailto:support@oisifgames.com">support@oisifgames.com</a>.
-       Because player accounts are anonymous, we may need details that let us
-       locate your record: device model, country, and the rough dates you played.
-       If we cannot identify you from what you send, we will say so rather than
+       Because player accounts are anonymous, quote the install ID and the Cloud
+       ID shown in the game's settings: that is how we find your record. If we
+       cannot identify you from what you send, we will say so rather than
        guess.</p>
 
     <p>If you are in the EEA or the UK and you are not satisfied with our response,
@@ -254,6 +415,8 @@
        address.</p>
   </div>
   </section>
+</main>
+
 </main>
 
 <footer class="site">

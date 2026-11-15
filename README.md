@@ -33,7 +33,8 @@ class="game">` in `index.html`:
     <img src="/assets/games/<name>.webp" alt="<Name>">
   </div>
   <div class="game-body">
-    <h3>…</h3><p>…</p><p class="meta">…</p><a class="btn" href="…">App Store</a>
+    <h3>…</h3><p>…</p><p class="meta">…</p>
+    <div class="stores"><a class="btn" href="…">App Store</a><a class="btn" href="…">Google Play</a></div>
   </div>
 </article>
 ```

@@ -174,3 +174,4 @@ video.unrulymedia.com, 947824792, RESELLER
 video.unrulymedia.com, 703273072, RESELLER
 video.unrulymedia.com, 201313863, RESELLER
 voisetech.com, 1066, RESELLER
+google.com, pub-2476530638131027, DIRECT, f08c47fec0942fa0
